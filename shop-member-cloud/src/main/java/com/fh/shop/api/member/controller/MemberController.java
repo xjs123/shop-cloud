@@ -51,6 +51,7 @@ public class MemberController extends BaseController {
         Map map=  new HashMap();
         map.put("memberVo",memberVo);
         map.put("count",count);
+        System.out.println("=========");
         return ServerResponse.success(map);
     }
 

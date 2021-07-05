@@ -81,7 +81,7 @@
         }
         $.ajax({
             type:"post",
-            url:"http://localhost:9000/member/api/member/login",
+            url:"http://localhost:9000/shop-member-api/api/member/login",
             data:{"memberName":v_param.memberName,"password":v_param.password},
             success:function (res) {
                 if(res.code==200){

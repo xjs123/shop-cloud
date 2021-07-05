@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: file-minio-api
+server:
+  port: 8089
+minio:
+  endpoint: http://192.168.81.137:9090
+  accessKey: minioadmin
+  secretKey: minioadmin
+  bucketName: fh2008

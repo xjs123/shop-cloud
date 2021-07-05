@@ -1,0 +1,41 @@
+
+server:
+  port: 9000
+
+eureka:
+  client:
+    register-with-eureka: true #注册到Eureka的注册中心
+    fetch-registry: true #获取注册实例列表
+    service-url:
+      defaultZone: http://localhost:8000/eureka/ #配置注册中心地址
+
+fh:
+  shop:
+    checkUrls:
+      /api/member/getMemVo,
+      /api/member/loginOut,
+      /api/carts/addCart,
+      /api/carts/findCart,
+      /api/carts/deleteBatchCartSku,
+      /api/carts/deleteCartSku
+spring:
+  cloud:
+    gateway:
+      discovery:
+       locator:
+        enabled: true
+        lower-case-service-id: true
+#          gateway:
+#            routes:
+#            - id: cate_route
+#              uri: lb://shop-cate-api
+#              predicates:
+#                Path=/shop-cate-api/**
+#              filters:
+#                - StripPrefix=1
+#            discovery:
+#                    locator:
+#                      enabled: true
+#                      lower-case-service-id: true #使用小写服务名，默认是大写
+  application:
+    name: api-gateway

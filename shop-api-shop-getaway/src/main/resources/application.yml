@@ -1,12 +1,65 @@
+#server:
+#  port: 9201
+#service-url:
+#  shop-goods-api: http://localhost:8082
+#spring:
+#  cloud:
+#    gateway:
+#      routes:
+#        - id: path_route #路由的ID
+#          uri: ${service-url.shop-goods-api}/api/skus/status #匹配后路由地址
+#          predicates: # 断言，路径相匹配的进行路由
+#            - Path=/api/skus/status
+
 server:
-  port: 9201
-service-url:
-  shop-goods-api: http://localhost:8082
+  port: 9000
+
+eureka:
+  client:
+    register-with-eureka: true #注册到Eureka的注册中心
+    fetch-registry: true #获取注册实例列表
+    service-url:
+      defaultZone: http://localhost:8000/eureka/ #配置注册中心地址
+
+logging:
+  level:
+    org.springframework.cloud.gateway: debug
+fh:
+  shop:
+    checkUrls:
+      /api/member/getMemVo,
+      /api/member/loginOut,
+      /api/carts/addCart,
+      /api/carts/findCart,
+      /api/carts/deleteBatchCartSku,
+      /api/carts/deleteCartSku
 spring:
+  redis:
+    host: 192.168.81.129
+    port: 6060
   cloud:
-    gateway:
-      routes:
-        - id: path_route #路由的ID
-          uri: ${service-url.shop-goods-api}/api/skus/status #匹配后路由地址
-          predicates: # 断言，路径相匹配的进行路由
-            - Path=/api/skus/status
+          gateway:
+            routes:
+            - id: cate_route
+              uri: lb://shop-cate-api
+              predicates:
+                Path=/shop-cate-api/**
+              filters:
+                - StripPrefix=1
+                - name: RequestRateLimiter
+                  args:
+                    redis-rate-limiter.replenishRate: 1 #每秒允许处理的请求数量
+                    redis-rate-limiter.burstCapacity: 1 #每秒最大处理的请求数量
+                    key-resolver: "#{@pathKeyResolver}" #限流策略，对应策略的Bean
+            discovery:
+                    locator:
+
+                      enabled: true
+                      lower-case-service-id: true #使用小写服务名，默认是大写
+      #    consul: #Consul服务注册发现配置
+      #            host: localhost
+      #            port: 8500
+      #            discovery:
+      #              service-name: ${spring.application.name}
+  application:
+    name: api-gateway

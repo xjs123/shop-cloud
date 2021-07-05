@@ -8,16 +8,23 @@ eureka:
 spring:
   application:
     name: shop-gateway
+  cloud:
+      consul:
+        discovery:
+          service-name: ${spring.application.name}
+        host: localhost
+        port: 8500
 server:
   port: 9000
-zuul:
-  routes:
-    shop-cate-api: #微服务的名字 spring.application.name
-      path: /cate/** #对应访问的路径
-    shop-goods-api:
-      path: /goods/**
-    shop-member-api:
-      path: /member/**
+#zuul:
+
+#  routes:
+#    shop-cate-api: #微服务的名字 spring.application.name
+#      path: /cate/** #对应访问的路径
+#    shop-goods-api:
+#      path: /goods/**
+#    shop-member-api:
+#      path: /member/**
 
 shop:
   fh:

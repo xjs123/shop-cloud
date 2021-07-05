@@ -165,7 +165,7 @@
     function initLogin() {
         $.ajax({
             type:"get",
-            url:"http://localhost:9000/member/api/member/getMemVo",
+            url:"http://localhost:9000/shop-member-api/api/member/getMemVo",
             beforeSend: function(xhr) {
                 var sout = $.cookie("fh-xjs");
                 xhr.setRequestHeader("x-auth",sout);
@@ -195,7 +195,7 @@
     function LoginOut() {
         $.ajax({
             type:"get",
-            url:"http://localhost:9000/member/api/member/loginOut",
+            url:"http://localhost:9000/shop-member-api/api/member/loginOut",
             success:function (res) {
 
                 if(res.code==200){
@@ -210,7 +210,7 @@
     function initSku() {
         $.ajax({
             type:"get",
-            url:"http://localhost:9201/api/skus/status",
+            url:"http://localhost:9000/shop-goods-api/api/skus/status",
             success:function (res) {
                 if(res.code==200){
                     var v_skuList=res.data;
@@ -222,13 +222,9 @@
                             .replace(/##skuName##/g,sku.skuName);
                             $("#productListDiv").append(html);
                     }
-
                 }
              }
-
         })
-
-
     }
 
     
@@ -237,13 +233,11 @@
     function initCate() {
         $.ajax({
             type:"get",
-            url:"http://localhost:9000/cate/api/cates",
+            url:"http://localhost:9000/shop-cate-api/api/cates",
             success:function (res) {
                 if (res.code == 200) {
                      cateList = res.data;
-
                     initeFather();
-
                     $("#cateDiv").html(v_html);
                     initCss();
                 }

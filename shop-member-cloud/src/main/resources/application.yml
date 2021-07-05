@@ -31,6 +31,13 @@ spring:
     checkTemplateLocation: false
   application:
     name: shop-member-api
+#  cloud:
+#    consul:
+#      discovery:
+#        service-name: ${spring.application.name}
+#      host: localhost
+#      port: 8500
+
 
 eureka:
   client:

@@ -21,7 +21,8 @@ public class ICateServiceImpl implements ICateService {
 
     @Override
 
-    public ServerResponse findCate() {
+    public ServerResponse
+    findCate() {
         //首先需要去redis缓存查询数据
         String cateLis = RedisUtil.get("cateList");
         //如果有数据则直接返回list(将json格式的string转换为list)

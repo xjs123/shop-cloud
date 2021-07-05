@@ -13,8 +13,7 @@ public class SkuController {
         @Resource(name = "skuService")
         private ISkuService skuService;
 
-        @GetMapping("/skus/st" +
-                "atus")
+        @GetMapping("/skus/status")
         public ServerResponse findStatusList(){
             return skuService.findStatusList();
         }

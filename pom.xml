@@ -14,6 +14,9 @@
       <module>shop-api-model</module>
     <module>shop-api-model</module>
     <module>shop-api-shop-getaway</module>
+      <module>shop-consul-Server</module>
+      <module>getway-service</module>
+      <module>file-minio-api</module>
   </modules>
   <parent>
     <groupId>org.springframework.boot</groupId>
